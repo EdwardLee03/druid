@@ -174,6 +174,26 @@
 								<td  class="lang"  langKey="MaxWaitThreadCount"></td>
 							</tr>
 							<tr>
+								<td valign="top" class="td_lable" > *  <span class="lang"  langKey="LogDifferentThread">LogDifferentThread</span></td>
+								<td>{{=datasourceNow.LogDifferentThread}}</td>
+								<td  class="lang"  langKey="LogDifferentThread"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" > *  <span class="lang"  langKey="UseUnfairLock">UseUnfairLock</span></td>
+								<td>{{=datasourceNow.UseUnfairLock}}</td>
+								<td  class="lang"  langKey="UseUnfairLock"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" > *  <span class="lang"  langKey="InitGlobalVariants">InitGlobalVariants</span></td>
+								<td>{{=datasourceNow.InitGlobalVariants}}</td>
+								<td  class="lang"  langKey="InitGlobalVariants"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" > *  <span class="lang"  langKey="InitVariants">InitVariants</span></td>
+								<td>{{=datasourceNow.InitVariants}}</td>
+								<td  class="lang"  langKey="InitVariants"></td>
+							</tr>
+							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="NotEmptyWaitCount">NotEmptyWaitCount</span></td>
 								<td>{{=datasourceNow.NotEmptyWaitCount}}</td>
 								<td  class="lang"  langKey="NotEmptyWaitCountDesc">Total times for wait to get a connection</td>
@@ -196,7 +216,7 @@
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="TransactionHistogram">TransactionHistogram</span></td>
 								<td>{{=datasourceNow.TransactionHistogram}}</td>
-								<td  class="lang"  langKey="TransactionHistogramDesc">The histogram values of transaction time, [0-10 ms, 10-100 ms, 100-1 s, 1-10 s, 10-100 s, >100 s]</td>
+								<td  class="lang"  langKey="TransactionHistogramDesc">The histogram values of transaction time, [0-1 ms, 1-10 ms, 10-100 ms, 100-1 s, 1-10 s, 10-100 s, >100 s]</td>
 							</tr>
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="PoolingCount">PoolingCount</span></td>
@@ -243,6 +263,16 @@
 								<td>{{=datasourceNow.LogicConnectErrorCount}}</td>
 								<td  class="lang"  langKey="LogicConnectErrorCountDesc">Total connect error times</td>
 							</tr>
+                            <tr>
+                                <td valign="top" class="td_lable" >   <span class="lang"  langKey="DiscardCount">DiscardCount</span></td>
+                                <td>{{=datasourceNow.DiscardCount}}</td>
+                                <td  class="lang"  langKey="DiscardCountDesc">Discard connection count with validate fail </td>
+                            </tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="RecycleErrorCount">RecycleErrorCount</span></td>
+								<td>{{=datasourceNow.RecycleErrorCount}}</td>
+								<td  class="lang"  langKey="RecycleErrorCount">Total connect error times</td>
+							</tr>
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="PhysicalConnectCount">PhysicalConnectCount</span></td>
 								<td>{{=datasourceNow.PhysicalConnectCount}}</td>
@@ -261,7 +291,22 @@
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="ExecuteCount">ExecuteCount</span></td>
 								<td>{{=datasourceNow.ExecuteCount}}</td>
-								<td  class="lang"  langKey="ExecuteCountDesc"></td>
+								<td  class="lang"  langKey="ExecuteCountDesc">Total Execute Count</td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="ExecuteQueryCount">ExecuteQueryCount</span></td>
+								<td>{{=datasourceNow.ExecuteQueryCount}}</td>
+								<td  class="lang"  langKey="ExecuteQueryCountDesc"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="ExecuteUpdateCount">ExecuteUpdateCount</span></td>
+								<td>{{=datasourceNow.ExecuteUpdateCount}}</td>
+								<td  class="lang"  langKey="ExecuteUpdateCountDesc"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="ExecuteBatchCount">ExecuteBatchCount</span></td>
+								<td>{{=datasourceNow.ExecuteBatchCount}}</td>
+								<td  class="lang"  langKey="ExecuteBatchCountDesc"></td>
 							</tr>
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="ErrorCount">ErrorCount</span></td>
@@ -277,6 +322,16 @@
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="RollbackCount">RollbackCount</span></td>
 								<td>{{=datasourceNow.RollbackCount}}</td>
 								<td  class="lang"  langKey="RollbackCountDesc"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="PreparedStatementOpenCount">PSOpenCount</span></td>
+								<td>{{=datasourceNow.PreparedStatementOpenCount}}</td>
+								<td  class="lang"  langKey="PreparedStatementOpenCount"></td>
+							</tr>
+							<tr>
+								<td valign="top" class="td_lable" >   <span class="lang"  langKey="PreparedStatementClosedCount">PSClosedCount</span></td>
+								<td>{{=datasourceNow.PreparedStatementClosedCount}}</td>
+								<td  class="lang"  langKey="PreparedStatementClosedCount"></td>
 							</tr>
 							<tr>
 								<td valign="top" class="td_lable" >   <span class="lang"  langKey="PSCacheAccessCount">PSCacheAccessCount</span></td>
@@ -357,7 +412,6 @@
 					init : function() {
 						druid.common.buildHead(1);
 						this.ajaxRequestForBasicInfo();
-						druid.lang.init();
 					},
 					ajaxRequestForBasicInfo : function() {
 						$.ajax({

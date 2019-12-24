@@ -1,5 +1,5 @@
 /*
- * Copyright 1999-2101 Alibaba Group Holding Ltd.
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,16 @@ public class SQLGroupingSetExpr extends SQLExprImpl {
 
     private final List<SQLExpr> parameters = new ArrayList<SQLExpr>();
 
+    public SQLGroupingSetExpr clone() {
+        SQLGroupingSetExpr x = new SQLGroupingSetExpr();
+        for (SQLExpr p : parameters) {
+            SQLExpr p2 = p.clone();
+            p2.setParent(x);
+            x.parameters.add(p2);
+        }
+        return x;
+    }
+
     public List<SQLExpr> getParameters() {
         return parameters;
     }
@@ -43,6 +53,11 @@ public class SQLGroupingSetExpr extends SQLExprImpl {
             acceptChild(visitor, parameters);
         }
         visitor.endVisit(this);
+    }
+
+    @Override
+    public List getChildren() {
+        return this.parameters;
     }
 
     @Override

@@ -1,3 +1,6 @@
+# 请参与投票
+* 2019最受欢迎中国开源软件评选投票 https://www.oschina.net/project/top_cn_2019 请参与投票
+
 # druid
 
 [![Build Status](https://travis-ci.org/alibaba/druid.svg?branch=master)](https://travis-ci.org/alibaba/druid)
@@ -18,3 +21,4 @@ Documentation
 
 - 中文 https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98
 - English https://github.com/alibaba/druid/wiki/FAQ
+- Druid Spring Boot Starter https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter

@@ -1,5 +1,5 @@
 /*
- * Copyright 1999-2101 Alibaba Group Holding Ltd.
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  */
 package com.alibaba.druid.sql.ast;
 
-import com.alibaba.druid.sql.ast.statement.SQLSelectOrderByItem;
-import com.alibaba.druid.sql.visitor.SQLASTVisitor;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLOrderBy extends SQLObjectImpl {
+import com.alibaba.druid.sql.ast.statement.SQLSelectOrderByItem;
+import com.alibaba.druid.sql.visitor.SQLASTVisitor;
+
+public final class SQLOrderBy extends SQLObjectImpl {
 
     protected final List<SQLSelectOrderByItem> items = new ArrayList<SQLSelectOrderByItem>();
     
@@ -37,11 +37,20 @@ public class SQLOrderBy extends SQLObjectImpl {
         addItem(item);
     }
 
+    public SQLOrderBy(SQLExpr expr, SQLOrderingSpecification type){
+        SQLSelectOrderByItem item = new SQLSelectOrderByItem(expr, type);
+        addItem(item);
+    }
+
     public void addItem(SQLSelectOrderByItem item) {
         if (item != null) {
             item.setParent(this);
         }
         this.items.add(item);
+    }
+
+    public void addItem(SQLExpr item) {
+        addItem(new SQLSelectOrderByItem(item));
     }
 
     public List<SQLSelectOrderByItem> getItems() {
@@ -95,5 +104,19 @@ public class SQLOrderBy extends SQLObjectImpl {
 
     protected SQLSelectOrderByItem createItem() {
         return new SQLSelectOrderByItem();
+    }
+
+    public SQLOrderBy clone() {
+        SQLOrderBy x = new SQLOrderBy();
+
+        for (SQLSelectOrderByItem item : items) {
+            SQLSelectOrderByItem item1 = item.clone();
+            item1.setParent(x);
+            x.items.add(item1);
+        }
+
+        x.sibings = sibings;
+
+        return x;
     }
 }

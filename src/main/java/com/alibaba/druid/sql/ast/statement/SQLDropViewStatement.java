@@ -1,5 +1,5 @@
 /*
- * Copyright 1999-2101 Alibaba Group Holding Ltd.
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.alibaba.druid.sql.ast.SQLName;
 import com.alibaba.druid.sql.ast.SQLStatementImpl;
 import com.alibaba.druid.sql.visitor.SQLASTVisitor;
 
-public class SQLDropViewStatement extends SQLStatementImpl implements SQLDDLStatement {
+public class SQLDropViewStatement extends SQLStatementImpl implements SQLDropStatement {
 
     protected List<SQLExprTableSource> tableSources = new ArrayList<SQLExprTableSource>();
 
@@ -101,4 +101,8 @@ public class SQLDropViewStatement extends SQLStatementImpl implements SQLDDLStat
         this.ifExists = ifExists;
     }
 
+    @Override
+    public List getChildren() {
+        return tableSources;
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 1999-2101 Alibaba Group Holding Ltd.
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,20 +15,18 @@
  */
 package com.alibaba.druid.sql.ast;
 
+import com.alibaba.druid.sql.ast.expr.SQLIdentifierExpr;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SQLPartitionBy extends SQLObjectImpl {
-
     protected SQLSubPartitionBy  subPartitionBy;
-
     protected SQLExpr            partitionsCount;
-
     protected boolean            linear;
-
     protected List<SQLPartition> partitions = new ArrayList<SQLPartition>();
-
     protected List<SQLName>      storeIn    = new ArrayList<SQLName>();
+    protected List<SQLExpr>      columns    = new ArrayList<SQLExpr>();
 
     public List<SQLPartition> getPartitions() {
         return partitions;
@@ -74,4 +72,52 @@ public abstract class SQLPartitionBy extends SQLObjectImpl {
     public List<SQLName> getStoreIn() {
         return storeIn;
     }
+
+    public List<SQLExpr> getColumns() {
+        return columns;
+    }
+
+    public void addColumn(SQLExpr column) {
+        if (column != null) {
+            column.setParent(this);
+        }
+        this.columns.add(column);
+    }
+
+    public void cloneTo(SQLPartitionBy x) {
+        if (subPartitionBy != null) {
+            x.setSubPartitionBy(subPartitionBy.clone());
+        }
+        if (partitionsCount != null) {
+            x.setPartitionsCount(partitionsCount.clone());
+        }
+        x.linear = linear;
+        for (SQLPartition p : partitions) {
+            SQLPartition p2 = p.clone();
+            p2.setParent(x);
+            x.partitions.add(p2);
+        }
+        for (SQLName name : storeIn) {
+            SQLName name2 = name.clone();
+            name2.setParent(x);
+            x.storeIn.add(name2);
+        }
+    }
+
+    public boolean isPartitionByColumn(long columnNameHashCode64) {
+        for (SQLExpr column : columns) {
+            if (column instanceof SQLIdentifierExpr
+                    && ((SQLIdentifierExpr) column)
+                    .nameHashCode64() == columnNameHashCode64) {
+                return true;
+            }
+        }
+
+        if (subPartitionBy != null) {
+            return subPartitionBy.isPartitionByColumn(columnNameHashCode64);
+        }
+        return false;
+    }
+
+    public abstract SQLPartitionBy clone();
 }
